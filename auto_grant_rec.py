@@ -1,5 +1,5 @@
 """
-RGC application grant record auto-filler
+RGC application grant record auto-filler (Command-line version)
 ==
 
 This auto-filler script takes in a pre-filled Excel spreadsheet grant record
@@ -8,6 +8,8 @@ in Python 3 and first built for a CRF application in 2019, and reused in a GRF
 application in 2020. To ease future work for fellow grant applicating PIs,
 the script has been generalized to take in custom User ID, Password, PI name
 and input Excel file. A template Excel file goes along with this script.
+
+This is the lightweight command-line (CLI) version.
 
 ## Dependencies
 ### Python3 packages
@@ -267,6 +269,8 @@ def fill_rgc():
                            + inputdict["RNO"] + ". Please check.")
         except ValueError:
             inputdict["RNO"] = str(row[1]["Reference number"])
+        if inputdict["RNO"] == 'nan':
+            inputdict["RNO"] = ''
         logger.info(inputdict["RNO"])
         inputdict["PTI"] = row[1]["Project title"]
         inputdict["FAM"] = str(row[1]["Amount (HK$)"])
