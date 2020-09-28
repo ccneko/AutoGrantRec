@@ -10,7 +10,7 @@ the script has been generalized to take in custom User ID, Password, PI name
 and input Excel file. A template Excel file goes along with this script.
 
 This version provides graphical user interface (GUI) and is equivalent to the
-command-line (CLI) version. This serves for the basis of a standalone package,
+command-line (CLI) version. This serves as the basis of a standalone package,
 which does not require prior installation of dependencies, but starts up more
 slowly.
 
@@ -22,10 +22,11 @@ slowly.
 - `gooey`:    creates GUI from CLI program
 
 Install Python3 package prerequities by
-- `python3 -m pip selenium pandas xlrd`
+- `python3 -m pip selenium pandas xlrd gooey`
 
 ### Chrome driver
-- Check your Chrome browser version from "Help > About Chrome"
+- Check your Chrome browser version from "Help > About Google Chrome"
+  （說明 > 關於 Google Chrome）
 - Download chromedriver that matches your OS and Chrome browser version from
   https://chromedriver.chromium.org/downloads
 - Unzip the downloaded package and note the path to the chromedriver
