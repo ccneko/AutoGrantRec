@@ -41,8 +41,8 @@ Install Python3 package prerequities by
 ## Remarks
 - This script first clears any existing record before filling the form according
   to your input file.
-- Add double quotes around PI name to let the argument parser read the whole
-  name containing space as one argument.
+- When using the CLI version, add double quotes around PI name to let the 
+  argument parser read the whole name containing space as one argument.
 - The browsing may stuck, e.g. at the proposal menu, in some rare occasions due
   to browser request timing issue. Just rerun the script and this should be
   solved.
