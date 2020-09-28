@@ -11,10 +11,11 @@ the script has been generalized to take in custom User ID, Password, PI name
 and input Excel file. A template Excel file goes along with this script.
 
 This script comes in both a command-line (CLI) and a graphical user interface 
-(GUI) version, where the CLI is more lightweight and the GUI could be more 
-intuitive to users unfamiliar with the terminal. This GUI version serves as 
-the basis of a standalone package, which does not require prior installation 
-of dependencies, but starts up more slowly.
+(GUI) version, where the CLI is cross-platform (Windows, Mac or Linux where 
+Python 3 has been installed) and more lightweight, whereas the GUI version 
+could be more intuitive to users unfamiliar with the terminal. This GUI 
+version serves as the basis of a standalone package, which does not require 
+prior installation of dependencies, but starts up more slowly.
 
 ## Dependencies
 ### Python3 packages
