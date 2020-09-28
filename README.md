@@ -1,7 +1,7 @@
 # AutoGrantRec
 
-Author: Claire Chung
-Last update: 29 Sep 2020
+- Author: Claire Chung
+- Last update: 29 Sep 2020
 
 This auto-filler script takes in a pre-filled Excel spreadsheet grant record
 to fill the grant record section in the RGC grant application. It was written
@@ -51,6 +51,7 @@ Install Python3 package prerequities by
   from auto GUI building with the Gooey package.
 
 ## License (MIT)
+```
 Copyright 2020 Claire Chung
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -70,4 +71,4 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-"""
+```
