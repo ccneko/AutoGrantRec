@@ -35,8 +35,12 @@ Install Python3 package prerequities by
   e.g. '/Users/ChanTaiMan/Downloads/chromedriver'
 
 ## Usage
-- `python3 auto_grant_rec.py -u USER_ID -p PASSWD -n "CHAN, Tai-man"
-   -c /path/to/chromedriver -i yourinput.xlsx`
+### CLI
+`python3 auto_grant_rec.py -u USER_ID -p PASSWD -n "CHAN, Tai-man" 
+-c /path/to/chromedriver -i yourinput.xlsx`
+### GUI
+- Double click the .exe (Windows) or .app (Mac) where it is downloaded
+- Fill in the relevant fields
 
 ## Remarks
 - This script first clears any existing record before filling the form according
