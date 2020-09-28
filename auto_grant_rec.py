@@ -21,7 +21,8 @@ Install Python3 package prerequities by
 - `python3 -m pip selenium pandas xlrd`
 
 ### Chrome driver
-- Check your Chrome browser version from "Help > About Chrome"
+- Check your Chrome browser version from "Help > About Google Chrome"
+  （說明 > 關於 Google Chrome）
 - Download chromedriver that matches your OS and Chrome browser version from
   https://chromedriver.chromium.org/downloads
 - Unzip the downloaded package and note the path to the chromedriver
