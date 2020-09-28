@@ -24,7 +24,8 @@ of dependencies, but starts up more slowly.
 - `gooey`:    creates GUI from CLI program
 
 Install Python3 package prerequities by
-- `python3 -m pip selenium pandas xlrd`
+- CLI: `python3 -m pip selenium pandas xlrd`
+- GUI: `python3 -m pip selenium pandas xlrd gooey`
 
 ### Chrome driver
 - Check your Chrome browser version from "Help > About Chrome"
