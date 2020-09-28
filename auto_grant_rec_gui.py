@@ -33,14 +33,12 @@ Install Python3 package prerequities by
   e.g. '/Users/ChanTaiMan/Downloads/chromedriver'
 
 ## Usage
-- `python3 auto_grant_rec.py -u USER_ID -p PASSWD -n "CHAN, Tai-man"
+- `python3 auto_grant_rec.py -u USER_ID -p PASSWD -n CHAN, Tai-man
    -c /path/to/chromedriver -i yourinput.xlsx`
 
 ## Remarks
 - This script first clears any existing record before filling the form according
   to your input file.
-- Add double quotes around PI name to let the argument parser read the whole
-  name containing space as one argument.
 - The browsing may stuck, e.g. at the proposal menu, in some rare occasions due
   to browser request timing issue. Just rerun the script and this should be
   solved.
@@ -106,7 +104,7 @@ def fill_rgc():
                         required=True, help='Input Excel file')
     parser.add_argument('-n', '--pi_name', metavar='PI_NAME', type=str,
                         required=True,
-                        help='PI name. Add double quotes, e.g. "Chan, Tai-man"')
+                        help='PI name')
     parser.add_argument('-c', '--chromedriver_path',
                         metavar='CHROME_DRIVER_PATH',
                         widget="FileChooser",
