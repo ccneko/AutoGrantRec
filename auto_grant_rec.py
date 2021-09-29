@@ -4,8 +4,8 @@ RGC application grant record auto-filler (Command-line version)
 
 This auto-filler script takes in a pre-filled Excel spreadsheet grant record
 to fill the grant record section in the RGC grant application. It was written
-in Python 3 and first built for a CRF application in 2019, and reused in a GRF
-application in 2020. To ease future work for fellow grant applicating PIs,
+in Python 3 and first built for a grant application in 2019, and reused in 
+2020 and 2021. To ease future work for fellow grant applicating PIs,
 the script has been generalized to take in custom User ID, Password, PI name
 and input Excel file. A template Excel file goes along with this script.
 
@@ -45,7 +45,7 @@ Install Python3 package prerequities by
   screen, runs faster, but has a higher chance of Timeout error.
 
 ## License (MIT)
-Copyright 2020 Claire Chung
+Copyright 2021 Claire Chung
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal
@@ -67,7 +67,7 @@ THE SOFTWARE.
 """
 
 __author__ = 'Claire Chung'
-__version__ = '1.0'
+__version__ = '1.2'
 __license__ = "MIT License"
 
 from selenium import webdriver
