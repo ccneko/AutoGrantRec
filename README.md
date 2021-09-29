@@ -40,7 +40,7 @@ Install Python3 package prerequities by
 `python3 auto_grant_rec.py -u USER_ID -p PASSWD -n "CHAN, Tai-man" 
 -c /path/to/chromedriver -i yourinput.xlsx`
 ### GUI
-- Double click the .exe (Windows) or .app (Mac) where it is downloaded
+- `python3 auto_grant_rec_gui.py`
 - Fill in the relevant fields
 
 ## Remarks
