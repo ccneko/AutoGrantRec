@@ -33,8 +33,9 @@ Install Python3 package prerequities by
    -c /path/to/chromedriver -i yourinput.xlsx`
 
 ## Remarks
-- This script first clears any existing record before filling the form according
-  to your input file.
+- This script first CLEARS any existing record in the online system before 
+  filling the form according to your input file. Please make sure your input 
+  file contains all necessary records.
 - Add double quotes around PI name to let the argument parser read the whole
   name containing space as one argument.
 - The browsing may stuck, e.g. at the proposal menu, in some rare occasions due
