@@ -5,8 +5,8 @@
 
 This auto-filler script takes in a pre-filled Excel spreadsheet grant record
 to fill the grant record section in the RGC grant application. It was written
-in Python 3 and first built for a CRF application in 2019, and reused in a GRF
-application in 2020. To ease future work for fellow grant applicating PIs,
+in Python 3 and first built for a grant application in 2019, and reused in 
+2020 and 2021. To ease future work for fellow grant applicating PIs,
 the script has been generalized to take in custom User ID, Password, PI name
 and input Excel file. A template Excel file goes along with this script.
 
