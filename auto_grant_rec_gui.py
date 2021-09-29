@@ -48,7 +48,7 @@ Install Python3 package prerequities by
   from auto GUI building with the Gooey package.
 
 ## License (MIT)
-Copyright 2020 Claire Chung
+Copyright 2021 Claire Chung
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal
@@ -70,7 +70,7 @@ THE SOFTWARE.
 """
 
 __author__ = 'Claire Chung'
-__version__ = '1.0'
+__version__ = '1.2'
 __license__ = "MIT License"
 
 from selenium import webdriver
@@ -91,35 +91,39 @@ from gooey import Gooey, GooeyParser
 
 @Gooey
 def fill_rgc():
-    parser = GooeyParser(description='Parse user ID, password ' +
-                                                 'and grant record Excel file '+
-                                                 'to the GRF application for '
-                                                 'auto form filling.')
-    parser.add_argument('-u', '--user_id', metavar='USER_ID', type=str,
-                        required=True, help='User ID')
-    parser.add_argument('-p', '--pw', metavar='PASSWD', type=str,
-                        required=True, help='Password')
+    parser = GooeyParser(description=   'Parse user ID, password ' +
+                                        'and grant record Excel file ' +
+                                        'to the GRF application for ' +
+                                        'auto form filling.')
+    parser.add_argument('-d', '--webdriver_path',
+                        metavar='WEB_DRIVER_PATH',
+                        widget="FileChooser",
+                        type=str, default='chromedriver',
+                        help='path to web browser driver')
     parser.add_argument('-i', '--input', metavar='EXCEL_FILE_PATH', type=str,
                         widget="FileChooser",
                         required=True, help='Input Excel file')
-    parser.add_argument('-n', '--pi_name', metavar='PI_NAME', type=str,
-                        required=True,
-                        help='PI name')
-    parser.add_argument('-c', '--chromedriver_path',
-                        metavar='CHROME_DRIVER_PATH',
-                        widget="FileChooser",
-                        type=str, default='chromedriver',
-                        help='path to chromedriver')
     parser.add_argument('-l', '--log_path', metavar='LOG_FILE_PATH', type=str,
                         default=datetime.datetime.now().strftime(
                                 '%Y%m%d-%H%M%S') + '-rgc-grantrec.log',
                         help='path to chromedriver')
+    parser.add_argument('-n', '--pi_name', metavar='PI_NAME', type=str,
+                        required=True,
+                        help='PI name. Add double quotes, e.g. "Chan, Tai-man"')
+    parser.add_argument('-p', '--pw', metavar='PASSWD', type=str,
+                        required=True, help='Password')
+    parser.add_argument('-u', '--user_id', metavar='USER_ID', type=str,
+                        required=True, help='User ID')
+    parser.add_argument('-w', '--webdriver', metavar='WEBDRIVER_CHOICE',
+                        type=str, choices=['Chrome', 'Firefox', 'Safari'],
+                        default='Chrome', help='path to webdriver')
     parser.add_argument('--verbose', nargs='?')
     parser.add_argument('--version', '-v', action='version',
                         version='%(prog)s ' + __version__)
     parser.add_argument('--headless', nargs='?', const=True,
                         help='Add this argument to skip showing the browser')
     args = parser.parse_args()
+
 
 
     ### Initialize logger ###
@@ -148,21 +152,36 @@ def fill_rgc():
     df = pd.concat(pd.read_excel(args.input,
                                  sheet_name=['On-going', 'Completed',
                                              'Pending']))
+    df1 = df.loc[df['Status'] == 'Pending'].reset_index(drop=True)
     df = df.loc[df['End date'] >= datetime.datetime.strptime(
-        str(datetime.datetime.now().year - 4) + '-10-01', '%Y-%m-%d')].\
+        str(datetime.datetime.now().year - 4) + '-10-01', '%Y-%m-%d')]. \
         reset_index(drop=True)
+    df = pd.concat([df, df1]).reset_index(drop=True)
     df = df.loc[~df['Role'].isna()]
 
     ### Prepare browser worker ###
-    chrome_options = Options()
-    # chrome_options.add_argument("--user-data-dir=chrome-data")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--lang=us")
-    if args.headless:
-        chrome_options.add_argument("--headless")
+    if args.webdriver == 'Chrome':
+        chrome_options = Options()
+        # chrome_options.add_argument("--user-data-dir=chrome-data")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--lang=us")
+        if args.headless:
+            chrome_options.add_argument("--headless")
 
-    driver: WebDriver = webdriver.Chrome(options=chrome_options,
-                                         executable_path=args.chromedriver_path)
+        driver: WebDriver = webdriver.Chrome(
+            options=chrome_options,
+            executable_path=args.webdriver_path
+        )
+
+    elif args.webdriver == 'Firefox':
+        driver: WebDriver = webdriver.Firefox(
+            executable_path=args.webdriver_path
+        )
+
+    elif args.webdriver == 'Safari':
+        driver: WebDriver = webdriver.Safari(
+            executable_path=args.webdriver_path
+        )
     driver.delete_all_cookies()
     wait = WebDriverWait(driver, 10)
 
@@ -259,7 +278,7 @@ def fill_rgc():
         timestamp = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
         logger.info(timestamp)
         inputdict = {}
-        inputdict["NPI"] = args.pi_name
+        inputdict["NPI"] = args.pi_name.strip('\"')
         inputdict["CAP"] = role_dict[row[1]["Role"]]  # value: P/PC/C/Co-PI
         inputdict["FSF"] = ["N", "Y"][row[1]['Funding source'] == "GRF"]  # Y/N
         inputdict["FSR"] = row[1]['Funding source']
@@ -277,7 +296,7 @@ def fill_rgc():
         logger.info(inputdict["RNO"])
         if inputdict["RNO"] == 'nan':
             inputdict["RNO"] = ''
-        inputdict["PTI"] = row[1]["Project title"]
+        inputdict["PTI"] = str(row[1]["Project title"])
         inputdict["FAM"] = str(row[1]["Amount (HK$)"])
         inputdict["RGC"] = row[1]["UGC/RGC funding"]  # Y/N
         inputdict["SDA"] = str(row[1]["Start date"].day)
@@ -290,7 +309,7 @@ def fill_rgc():
             inputdict["NHR"] = str(int(row[1]["Number of hours"]))
         else:
             inputdict["NHR"] = 0
-        inputdict["OBJ"] = row[1]["Project Objectives"]
+        inputdict["OBJ"] = str(row[1]["Project Objectives"])
 
         # Load the Form
         wait.until(EC.element_to_be_clickable(
