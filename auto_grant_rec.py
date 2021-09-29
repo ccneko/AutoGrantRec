@@ -274,9 +274,9 @@ def fill_rgc():
         if inputdict["RNO"] == 'nan':
             inputdict["RNO"] = ''
         logger.info(inputdict["RNO"])
-        inputdict["PTI"] = row[1]["Project title"]
+        inputdict["PTI"] = str(row[1]["Project title"])
         inputdict["FAM"] = str(row[1]["Amount (HK$)"])
-        inputdict["RGC"] = row[1]["UGC/RGC funding"]  # Y/N
+        inputdict["RGC"] = str(row[1]["UGC/RGC funding"])  # Y/N
         inputdict["SDA"] = str(row[1]["Start date"].day)
         inputdict["SMO"] = str(row[1]["Start date"].month)
         inputdict["SYR"] = str(row[1]["Start date"].year)
@@ -287,7 +287,7 @@ def fill_rgc():
             inputdict["NHR"] = str(int(row[1]["Number of hours"]))
         else:
             inputdict["NHR"] = 0
-        inputdict["OBJ"] = row[1]["Project Objectives"]
+        inputdict["OBJ"] = str(row[1]["Project Objectives"])
 
         # Load the Form
         wait.until(EC.element_to_be_clickable(
