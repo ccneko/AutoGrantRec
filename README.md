@@ -48,9 +48,9 @@ Install Python3 package prerequities by
   to your input file.
 - When using the CLI version, add double quotes around PI name to let the 
   argument parser read the whole name containing space as one argument.
-- The browsing may stuck, e.g. at the proposal menu, in some rare occasions due
-  to browser request timing issue. Just rerun the script and this should be
-  solved.
+- The browsing may get stuck, e.g. at the proposal menu, in some rare occasions 
+  due to browser request timing issue. Just rerun the script and this should be
+  solved. (Not observed this year)
 - Note that the headless mode skips showing the browser pop-up to free up the
   screen, runs faster, but has a higher chance of Timeout error.
 - Please ignore spelling errors of the GUI version due to incomplete display
