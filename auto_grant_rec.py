@@ -110,7 +110,7 @@ def fill_rgc():
     parser.add_argument('-l', '--log_path', metavar='LOG_FILE_PATH', type=str,
                         default=datetime.datetime.now().strftime(
                                 '%Y%m%d-%H%M%S') + '-rgc-grantrec.log',
-                        help='path to chromedriver')
+                        help='path to run log')
     parser.add_argument('--verbose', nargs='?')
     parser.add_argument('--version', '-v', action='version',
                         version='%(prog)s ' + __version__)
