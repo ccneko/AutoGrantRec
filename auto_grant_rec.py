@@ -16,7 +16,7 @@ This is the lightweight command-line (CLI) version.
 - `selenium`: webdriver
 - `pandas`:   table handler
 - `xlrd`:     Excel handler
-- `openxl`:   Excel handler
+- `openpyxl`:   Excel handler
 
 Install Python3 package prerequities by
 - `python3 -m pip selenium pandas xlrd`
