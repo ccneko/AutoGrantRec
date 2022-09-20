@@ -16,6 +16,7 @@ This is the lightweight command-line (CLI) version.
 - `selenium`: webdriver
 - `pandas`:   table handler
 - `xlrd`:     Excel handler
+- `openxl`:   Excel handler
 
 Install Python3 package prerequities by
 - `python3 -m pip selenium pandas xlrd`
@@ -67,11 +68,12 @@ THE SOFTWARE.
 """
 
 __author__ = 'Claire Chung'
-__version__ = '1.2'
+__version__ = '1.3'
 __license__ = "MIT License"
 
 from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.chrome import service as fs
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -156,8 +158,9 @@ def fill_rgc():
     if args.headless:
         chrome_options.add_argument("--headless")
 
+    chrome_service = fs.Service(executable_path=args.chromedriver_path)
     driver: WebDriver = webdriver.Chrome(options=chrome_options,
-                                         executable_path=args.chromedriver_path)
+                                         service=chrome_service)
     driver.delete_all_cookies()
     wait = WebDriverWait(driver, 10)
 
