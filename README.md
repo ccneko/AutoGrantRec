@@ -22,11 +22,12 @@ prior installation of dependencies, but starts up more slowly.
 - `selenium`: webdriver
 - `pandas`:   table handler
 - `xlrd`:     Excel handler
+- `openpyxl`: Excel handler
 - `gooey`:    creates GUI from CLI program
 
 Install Python3 package prerequities by
-- CLI: `python3 -m pip install selenium pandas xlrd`
-- GUI: `python3 -m pip install selenium pandas xlrd gooey`
+- CLI: `python3 -m pip install selenium pandas xlrd openpyxl`
+- GUI: `python3 -m pip install selenium pandas xlrd openpyxl gooey`
 
 ### Chrome driver
 - Check your Chrome browser version from "Help > About Chrome"
