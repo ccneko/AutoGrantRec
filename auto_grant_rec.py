@@ -21,6 +21,14 @@ This is the lightweight command-line (CLI) version.
 Install Python3 package prerequities by
 - `python3 -m pip selenium pandas xlrd`
 
+### Chrome Browser
+- https://www.google.com/chrome/
+- via commmand-line on Linux Ubuntu:
+  - `sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'`
+  - `sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -`
+  - `sudo apt update`
+  - `sudo apt install google-chrome-stable`
+  
 ### Chrome driver
 - Check your Chrome browser version from "Help > About Google Chrome"
   （說明 > 關於 Google Chrome）
