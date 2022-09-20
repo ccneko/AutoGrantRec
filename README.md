@@ -1,7 +1,7 @@
 # AutoGrantRec
 
 - Author: Claire Chung
-- Last update: 29 Sep 2021
+- Last update: 20 Sep 2022
 
 This auto-filler script takes in a pre-filled Excel spreadsheet grant record
 to fill the grant record section in the RGC grant application. It was written
@@ -25,8 +25,8 @@ prior installation of dependencies, but starts up more slowly.
 - `gooey`:    creates GUI from CLI program
 
 Install Python3 package prerequities by
-- CLI: `python3 -m pip selenium pandas xlrd`
-- GUI: `python3 -m pip selenium pandas xlrd gooey`
+- CLI: `python3 -m pip install selenium pandas xlrd`
+- GUI: `python3 -m pip install selenium pandas xlrd gooey`
 
 ### Chrome driver
 - Check your Chrome browser version from "Help > About Chrome"
