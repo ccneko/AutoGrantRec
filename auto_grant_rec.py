@@ -97,14 +97,12 @@ def fill_rgc():
     parser.add_argument('-p', '--pw', metavar='PASSWD', type=str,
                         required=True, help='Password')
     parser.add_argument('-i', '--input', metavar='EXCEL_FILE_PATH', type=str,
-                        widget="FileChooser",
                         required=True, help='Input Excel file')
     parser.add_argument('-n', '--pi_name', metavar='PI_NAME', type=str,
                         required=True,
                         help='PI name. Add double quotes, e.g. "Chan, Tai-man"')
     parser.add_argument('-c', '--chromedriver_path',
                         metavar='CHROME_DRIVER_PATH',
-                        widget="FileChooser",
                         type=str, default='chromedriver',
                         help='path to chromedriver')
     parser.add_argument('-l', '--log_path', metavar='LOG_FILE_PATH', type=str,
