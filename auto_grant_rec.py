@@ -180,14 +180,14 @@ def fill_rgc():
     wait.until(EC.element_to_be_clickable((By.NAME, 'submit')))
     logger.info('Login page loaded')
 
-    input_userid = driver.find_element_by_xpath("//input[@maxlength='20']")
+    input_userid = driver.find_element(By.XPATH, "//input[@maxlength='20']")
     input_userid.send_keys(args.user_id)
     logger.info('User ID filled.')
 
     pwd_filled = False
     while not pwd_filled:
         try:
-            input_pwd = driver.find_element_by_xpath(
+            input_pwd = driver.find_element(By.XPATH, 
                 "//input[@type='password']")
             input_pwd.send_keys(args.pw)
             logger.info('User Password input filled.')
@@ -199,12 +199,12 @@ def fill_rgc():
             logger.debug(
                 "WARNING: ElementNotInteractable (Password). Retrying.")
 
-    driver.find_element_by_name("submit").click()
+    driver.find_element(By.NAME, "submit").click()
     logger.info("Login request submitted.")
 
     ### Select role ###
     wait.until(EC.element_to_be_clickable((By.NAME, "Continue")))
-    driver.find_element_by_name("Continue").click()
+    driver.find_element(By.NAME, "Continue").click()
     logger.info("User role selected.")
 
     wait.until(EC.element_to_be_clickable(
@@ -213,18 +213,18 @@ def fill_rgc():
 
     main_window = driver.current_window_handle
     logger.debug(main_window)
-    driver.find_element_by_link_text(
+    driver.find_element(By.LINK_TEXT,
         "Prepare Proposal / View Internal Comments").click()
     logger.info("Prepare Proposal clicked.")
     logger.debug(driver.window_handles)
     driver.switch_to.window(driver.window_handles[1])
     wait.until(EC.element_to_be_clickable((By.NAME, "yes"))) # value: "I accept"
-    driver.find_element_by_name("yes").click()
+    driver.find_element(By.NAME, "yes").click()
     logger.info("Terms accepted.")
     driver.switch_to.window(main_window)
     wait.until(EC.element_to_be_clickable((By.NAME, "ProposalMenu")))
-    driver.find_element_by_name("ProposalMenu").click()
-    driver.find_element_by_link_text(
+    driver.find_element(By.NAME, "ProposalMenu").click()
+    driver.find_element(By.LINK_TEXT,
         "Grant Record and Related Research Work of Investigator(s)").click()
     wait.until(EC.element_to_be_clickable(
         (By.XPATH,"//input[@value=' Add Project / Work " +
@@ -245,7 +245,7 @@ def fill_rgc():
                 and 'Project' not in button_value:
             buttons[0].click()
             wait.until(EC.element_to_be_clickable((By.NAME, 'piName')))
-            driver.find_element_by_name('del').click()
+            driver.find_element(By.NAME, 'del').click()
             driver.switch_to.alert.accept()
         else:
             buttons = driver.find_elements(By.XPATH, "//input[@type='button']")
@@ -302,7 +302,7 @@ def fill_rgc():
         wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//input[@value=' Add Project / Work " +
                        "(GRF/ECS & non-GRF/non-ECS) ']")))
-        add_proj = driver.find_element_by_xpath(
+        add_proj = driver.find_element(By.XPATH,
             "//input[@value=' Add Project / Work " +
             "(GRF/ECS & non-GRF/non-ECS) ']")
         add_proj.click()
@@ -312,7 +312,7 @@ def fill_rgc():
         npi_filled = False
         while not npi_filled:
             try:
-                input_pi_name = driver.find_element_by_name("piName")
+                input_pi_name = driver.find_element(By.NAME, "piName")
                 input_pi_name.send_keys(inputdict["NPI"])
                 assert input_pi_name.get_attribute("value") == inputdict["NPI"]
                 npi_filled = True
@@ -323,8 +323,8 @@ def fill_rgc():
                 input_pi_name.clear()
 
         # Capacity
-        driver.find_element_by_name("capacity").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "capacity").click()
+        driver.find_element(By.XPATH,
             "//select[@name='capacity']/option[@value='" + str(
                 inputdict['CAP']) + "']").click()
         # P/PC/C/Co-PI
@@ -332,35 +332,35 @@ def fill_rgc():
 
         # Funding Sources
         # radio, name=fund_src_flag, id=(fund_src_flag_Y, fund_src_flag_N)
-        driver.find_element_by_id(
+        driver.find_element(By.ID,
             "fund_src_flag_" + inputdict["FSF"]).click()  # radio button
         if inputdict['FSF'] == "N":
-            driver.find_element_by_name("fund_src").send_keys(inputdict["FSR"])
-            assert driver.find_element_by_name("fund_src")\
+            driver.find_element(By.NAME, "fund_src").send_keys(inputdict["FSR"])
+            assert driver.find_element(By.NAME, "fund_src")\
                        .get_attribute("value") == inputdict["FSR"]
         logger.info("Funding Sources filled.")
 
         # Status
-        driver.find_element_by_name("proj_status").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "proj_status").click()
+        driver.find_element(By.XPATH,
             "//select[@name='proj_status']/option[@value='" + inputdict[
                 'STA'] + "']").click()  # id same
-        assert Select(driver.find_element_by_name(
+        assert Select(driver.find_element(By.NAME,
             "proj_status")).first_selected_option.get_attribute("value") == \
                inputdict["STA"]
         logger.info("Status filled.")
 
         # Project Reference No.(if any)
-        driver.find_element_by_name("ref_no").send_keys(
+        driver.find_element(By.NAME, "ref_no").send_keys(
             inputdict["RNO"])  # text, no id
-        assert driver.find_element_by_name("ref_no").get_attribute("value") == \
+        assert driver.find_element(By.NAME, "ref_no").get_attribute("value") == \
                inputdict["RNO"]
         logger.info("Project Reference No. filled.")
 
         # Project / Work Title
-        driver.find_element_by_name("proj_title").send_keys(
+        driver.find_element(By.NAME, "proj_title").send_keys(
             inputdict["PTI"])  # text, no id
-        assert driver.find_element_by_name("proj_title").get_attribute("value")\
+        assert driver.find_element(By.NAME, "proj_title").get_attribute("value")\
                == inputdict["PTI"]
         logger.info("Project / Work Title filled.")
 
@@ -371,46 +371,46 @@ def fill_rgc():
             inputdict["FAM"] = 0
             assert inputdict["STA"] == 'U'
             logger.warning("0 filled for unknown funding amount.")
-        driver.find_element_by_name("fund_amt").send_keys(inputdict["FAM"])
-        assert driver.find_element_by_name("fund_amt").get_attribute("value") \
-               == inputdict["FAM"] or driver.find_element_by_name("fund_amt")\
+        driver.find_element(By.NAME, "fund_amt").send_keys(inputdict["FAM"])
+        assert driver.find_element(By.NAME, "fund_amt").get_attribute("value") \
+               == inputdict["FAM"] or driver.find_element(By.NAME, "fund_amt")\
                    .get_attribute("value") == '0'
         logger.info("Funding Amount (HK$) filled.")
 
         # RGC / UGC Funding (radio button)
         if inputdict["FSF"] == "Y":
             assert inputdict["RGC"] == "Y"
-        driver.find_element_by_id("ugcfunding_" + inputdict["RGC"]).click()
+        driver.find_element(By.ID, "ugcfunding_" + inputdict["RGC"]).click()
         logger.info("UGC/RGC funding filled.")
 
         # Start Date
-        driver.find_element_by_name("s_day").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "s_day").click()
+        driver.find_element(By.XPATH, 
             "//select[@name='s_day']/option[@value='" + inputdict[
                 'SDA'] + "']").click()
-        driver.find_element_by_name("s_month").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "s_month").click()
+        driver.find_element(By.XPATH, 
             "//select[@name='s_month']/option[@value='" + inputdict[
                 'SMO'] + "']").click()
-        driver.find_element_by_name("s_year").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "s_year").click()
+        driver.find_element(By.XPATH, 
             "//select[@name='s_year']/option[@value='" + inputdict[
                 'SYR'] + "']").click()
 
         # Estimated / Completion Date
-        driver.find_element_by_name("c_day").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "c_day").click()
+        driver.find_element(By.XPATH, 
             "//select[@name='c_day']/option[@value=" + inputdict[
                 'CDA'] + "]").click()
-        driver.find_element_by_name("c_month").click()
-        driver.find_element_by_xpath(
+        driver.find_element(By.NAME, "c_month").click()
+        driver.find_element(By.XPATH, 
             "//select[@name='c_month']/option[@value=" + inputdict[
                 'CMO'] + "]").click()
-        driver.find_element_by_name("c_year").click()
+        driver.find_element(By.NAME, "c_year").click()
         cyr_filled = False
         while not cyr_filled:
             try:
-                driver.find_element_by_xpath(
+                driver.find_element(By.XPATH, 
                     "//select[@name='c_year']/option[@value=" + inputdict[
                         'CYR'] + "]").click()
                 cyr_filled = True
@@ -420,7 +420,7 @@ def fill_rgc():
                              "(Completion Year). Retrying.")
 
         # Number of Hours Per Week Spent by the PI in Each On-going Project*
-        text_nhr = driver.find_element_by_name("workHourPer")
+        text_nhr = driver.find_element(By.NAME, "workHourPer")
         nhr_filled = False
         if text_nhr.is_enabled() and int(float(inputdict["NHR"])) > 0:
             # "Percent of Work Hour Spent should be a positive integer."
@@ -436,15 +436,15 @@ def fill_rgc():
                         "WARNING: Wrong Number of Hours filled. Retrying.")
 
         # Project / Work Objective
-        driver.find_element_by_name("projectObjective").send_keys(
+        driver.find_element(By.NAME, "projectObjective").send_keys(
             inputdict["OBJ"])  # textarea
 
         # Related to the current application
-        driver.find_element_by_id("overlap_NA").click()
+        driver.find_element(By.ID, "overlap_NA").click()
         # radio, name=overlap, id=(overlap_NA, overlap_RE)
 
         # Save record
-        driver.find_element_by_name("add").click()
+        driver.find_element(By.NAME, "add").click()
         filled_cnt += 1
 
     timestamp = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
